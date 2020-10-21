@@ -1,12 +1,17 @@
+%% Setup
 close all; clearvars; clc;
 
+% Enter name of transcript PDF
+fileName = 'Transcript.pdf';
+
 %% File Reading 
-transcript = extractFileText('Transcript.pdf');
+transcript = extractFileText(fileName);
 transcript_lines = splitlines(transcript);
 tokenized_lines = tokenizedDocument(transcript_lines);
 
 %% Parse .PDF
-subject_count = 0; results = [];
+subject_count = 0; 
+results = [];
 
 for i=1:length(tokenized_lines)
 
@@ -23,6 +28,8 @@ for i=1:length(tokenized_lines)
         % Not a valid line
     end 
 end 
+
+%% Calculate Honours Grade 
 
 N1 = min(sum(results(:,1) == 1), 24);
 N2 = min(sum(results(:,1) == 2), 24);
@@ -55,13 +62,8 @@ A2 = units_grade_sum_2/units_sum_2;
 A3 = units_grade_sum_3/units_sum_3; 
 A4 = units_grade_sum_4/units_sum_4;
 
-%% Perform and display Calculation 
 honours_average = (2*N2/24*A2 + 3*N3/24*A3 + 5*N4/24*A4)/(2*N2/24 + 3*N3/24+ 5*N4/24);
+
+%% Perform and display Calculation 
 fprintf('Your Honours Average is: %f\n', honours_average);
-fprintf('You have completed %d subects.\n', subject_count);
-
-
-
-
-
-
+fprintf('You have completed %d subjects.\n', subject_count);
