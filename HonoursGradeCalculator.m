@@ -2,7 +2,7 @@
 close all; clearvars; clc;
 
 % Enter name of transcript PDF
-fileName = 'Transcript.pdf';
+fileName = 'TranscriptTOM.pdf';
 
 %% File Reading 
 transcript = extractFileText(fileName);
@@ -20,6 +20,12 @@ for i=1:length(tokenized_lines)
     numbers = numbers(~isnan(numbers));
     
     try 
+        
+        % Handle practical experience insert
+        if (words(2) == 'Practical')
+            continue;
+        end
+        
         vals = numbers(end-2:end);
         vals(1) = floor(vals(1)/1000);
         results = [results; vals];
