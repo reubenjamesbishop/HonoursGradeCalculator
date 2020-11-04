@@ -2,7 +2,7 @@
 close all; clearvars; clc;
 
 % Enter name of transcript PDF
-fileName = 'TranscriptTOM.pdf';
+fileName = 'Transcript.pdf';
 
 %% File Reading 
 transcript = extractFileText(fileName);
